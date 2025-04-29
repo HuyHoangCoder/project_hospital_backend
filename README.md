@@ -1,57 +1,41 @@
-controllers
+# Hệ thống Phần mềm Quản lý Bệnh viện
 
-conplain 
+## 1. Hệ thống Xác thực (Authentication)
 
-<aside>
-💡
+- Đăng ký tài khoản mới kèm xác thực email.
+- Đăng nhập bằng username/password.
+- Khôi phục mật khẩu qua email.
+- Xác thực email bằng token.
 
-```jsx
-// Import các module và khai báo router 
-var express = require('express');
-var router = express.Router();
-var bodyParser = require('body-parser');
-var db = require.main.require ('./models/db_controller');
-//Middleware kiểm tra đăng nhập
-router.get('*', function(res, req, next){
-  if(req.cookies['username']==null){
-    res.redirect('/login');
-  }else{
-    next();
-  }
-})
+## 2. Quản lý Nhân sự
 
-router.get('/', function(req, res){
-    res.render('complain.ejs');
-})  
-router.post('/', function(req, res){
-    var message = req.body.message;
-    var name = req.body.name;
-    var email = req.body.email;
-    var subject = req.body.subject;
-    db.postcomplain(message, name, email, subject, function(err, result){
-      res.redirect('back')
-    })
-  });
-```
+- Thêm, sửa, xóa thông tin bác sĩ.
+- Quản lý thông tin nhân viên bệnh viện.
+- Phân quyền người dùng (role-based access control).
+- Quản lý ca làm việc.
 
-</aside>
+## 3. Quản lý Lịch hẹn
 
-models
+- Đặt lịch hẹn khám bệnh.
+- Chỉnh sửa thông tin lịch hẹn.
+- Hủy lịch hẹn.
+- Xem danh sách lịch hẹn.
 
-db_controller.js
+## 4. Quản lý Thuốc và Vật tư
 
-<aside>
-💡
+- Quản lý kho thuốc và vật tư y tế.
+- Theo dõi tồn kho.
+- Quản lý nhập kho / xuất kho thuốc.
+- Cảnh báo khi thuốc/vật tư gần hết hàng.
 
-```jsx
-  module.exports.postcomplain=function(message, name, email, subject, callback){
-    var query = "insert into complain(message,name,email,subject) values (?, ?, ?, ?)";
-    con.query(query,callback)
-  }
-module.exports.getcomplain = funciton(callback){
-  const query = "SELECT * FROM complain";
-  con.query(query, callback);
-}
-```
+## 5. Quản lý Tài chính
 
-</aside>
+- Tạo và quản lý hóa đơn.
+- Theo dõi thanh toán.
+- Báo cáo doanh thu.
+
+## 6. Hệ thống Phản hồi
+
+- Ghi nhận khiếu nại từ bệnh nhân.
+- Quản lý và xử lý phản hồi.
+- Theo dõi trạng thái xử lý phản hồi.
